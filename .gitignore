@@ -33,7 +33,6 @@ build/
 .vscode/
 
 ### My ignores ###
-mongodb/
 .env
 
 
