@@ -19,7 +19,7 @@ services:
       - $MONGO_INITDB_SCRIPTS_HOST_PATH:/docker-entrypoint-initdb.d/
     networks:
       - main-network
-    command: ["--bind_ip", "0.0.0.0"]
+    command: ["--bind_ip_all"]
     
   web:
     build:
