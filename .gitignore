@@ -35,3 +35,7 @@ build/
 ### My ignores ###
 mongodb/
 .env
+
+
+
+.DS_Store
