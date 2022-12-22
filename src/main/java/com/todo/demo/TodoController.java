@@ -1,5 +1,6 @@
 package com.todo.demo;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,6 +15,7 @@ public class TodoController {
     }
 
     @GetMapping("index")
+    @CrossOrigin(origins = "http://localhost:3010")
     public GetTodoOutput showTodo(GetTodoInput input) {
         GetTodoOutput result = new GetTodoOutput();
 

@@ -46,6 +46,21 @@ services:
     networks:
       - main-network
 
+  nextjs:
+    ports:
+      - 3010:3010
+    build:
+      context: frontend
+      dockerfile: Dockerfile
+    volumes:
+      - ./frontend:/usr/src/app
+      - /usr/src/app/node_modules
+      - /usr/src/app/.next
+    env_file:
+      - .env
+    networks:
+      - main-network  
+
 networks:
   main-network:
     external:
