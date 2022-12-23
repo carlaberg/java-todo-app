@@ -14,7 +14,7 @@ public class TodoService implements ITodoService {
             return "Hello my todo <3 sdf";
         }
 
-        String result = String.format("%s my todo <3", message);
+        String result = String.format("%s my todos <3", message);
 
         Log log = new Log();
         log.setMessage(message);
