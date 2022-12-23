@@ -12,7 +12,7 @@ export default function Home() {
     const sendMessage = async () => {
       console.log(message);
       const response = await fetch(
-        `http://164.90.208.25:8080/todo/index?message=${message}`
+        `http://localhsost:25000/todo/index?message=${message}`
       );
       const jsonResponse = await response.json();
       console.log(jsonResponse);
