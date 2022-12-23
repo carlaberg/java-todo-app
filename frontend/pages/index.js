@@ -11,6 +11,7 @@ export default function Home() {
   useEffect(() => {
     const sendMessage = async () => {
       console.log(message);
+      console.log("hello");
       const response = await fetch(
         `http://localhost:25000/todo/index?message=${message}`
       );
