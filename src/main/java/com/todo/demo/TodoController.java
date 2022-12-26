@@ -15,7 +15,7 @@ public class TodoController {
     }
 
     @GetMapping("index")
-    @CrossOrigin(origins = {"http://localhost:3010", "http://164.90.208.25:3010"})
+    @CrossOrigin
     public GetTodoOutput showTodo(GetTodoInput input) {
         GetTodoOutput result = new GetTodoOutput();
 

@@ -13,7 +13,7 @@ export default function Home() {
       console.log(message);
       console.log("hello");
       const response = await fetch(
-        `http://164.90.208.25:25000/todo/index?message=${message}`
+        `/java-api/todo/index?message=${message}`
       );
       const jsonResponse = await response.json();
       console.log(jsonResponse);
