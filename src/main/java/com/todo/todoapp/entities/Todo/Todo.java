@@ -1,8 +1,8 @@
-package com.todo.demo;
+package com.todo.todoapp.entities.Todo;
 
 import org.springframework.data.annotation.Id;
 
-public class Log {
+public class Todo {
     @Id
     private String id;
     private String message;
