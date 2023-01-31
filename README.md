@@ -9,6 +9,9 @@
 - Remote connection string: mongodb://user1:user1@164.90.208.25:26000/todo?authSource=todo&readPreference=primary&appname=MongoDB%20Compass&directConnection=true&ssl=false
 
 ## Endpoints
-- /todo/save?message=Hello - Saves a query parameter to the database
-- /todo/get - Gets a protected resource (Need to provide a token with the correct claims/role)
+- /auth/sign-up
 - /admin//user-claims/{uid}
+- /todo/create
+- /todo/update/{id}
+- /todo/delete/{id}
+- /todo/get - Gets a protected resource (Need to provide a token with the correct claims/role)

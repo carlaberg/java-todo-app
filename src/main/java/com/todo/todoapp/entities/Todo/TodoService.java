@@ -1,26 +1,43 @@
 package com.todo.todoapp.entities.Todo;
 
+import java.util.List;
+import java.util.Optional;
+
 public class TodoService implements ITodoService {
 
-    private final TodoRepository logRepository;
+    private final TodoRepository todoRepository;
 
-    public TodoService(TodoRepository logRepository) {
-        this.logRepository = logRepository;        
+    public TodoService(TodoRepository todoRepository) {
+        this.todoRepository = todoRepository;        
     }
 
     @Override
-    public String saveTodo(String message) {
-        if (message == null || message.length() == 0) {
-            return "Hello my todo <3 sdf";
+    public Todo createTodo(Todo todo) {
+        return todoRepository.save(todo);
+    }
+
+    @Override
+    public Todo updateTodo(String id, UpdateTodoInput updateTodoInput) throws Exception {
+        Optional<Todo> maybeTodo = todoRepository.findById(id);
+        
+        if (maybeTodo.isPresent()) {
+            Todo todo = maybeTodo.get();
+            todo.setText(updateTodoInput.getText());
+            return todoRepository.save(todo);
+        } else {
+            throw new Exception();
+
         }
+    }
 
-        String result = String.format("%s has been saved to the database", message);
+    @Override
+    public void deleteTodo(String id) throws Exception {
+        todoRepository.deleteById(id);
+    }
 
-        Todo todo = new Todo();
-        todo.setMessage(message);
-        logRepository.save(todo);
-
-        return result;
+    @Override
+    public List<Todo> getAll(String userId) throws Exception {
+        return todoRepository.findByCreatorId(userId);
     }
     
 }
