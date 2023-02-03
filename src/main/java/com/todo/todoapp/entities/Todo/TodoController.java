@@ -48,7 +48,6 @@ public class TodoController {
 
     @GetMapping("/all-todos")
     public List<Todo> getAllTodos(Principal principal) throws Exception {
-        System.out.println(principal.getName());
         return todoService.getAll(principal.getName());
     }    
 
