@@ -9,8 +9,13 @@ import {
   ListItemButton,
   ListItemText,
 } from "@mui/material";
+import Input from "@mui/material/Input";
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import { apiFetcher } from "../../hooks/useApi";
+import { mutate } from "swr";
 
-interface Todo {
+export interface Todo {
+  id: string;
   text: string;
 }
 
@@ -21,6 +26,22 @@ interface TodoListProps {
 const theme = createTheme();
 
 export default function TodoList({ items }: TodoListProps) {
+  const updateTodo = async (id: string, text: string) => {
+    const itemToUpdate = items.findIndex((item) => item.id === id);
+    const itemsBefore = items.slice(0, itemToUpdate);
+    const itemsAfter = items.slice(itemToUpdate + 1);
+    const newItem = { id, text };
+    const newItems = [...itemsBefore, newItem, ...itemsAfter];
+    
+    mutate("/todo/all-todos", newItems, false);
+
+    await apiFetcher({
+      path: `/todo/update/${id}`,
+      body: newItem,
+      method: "PUT",
+    });
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -37,15 +58,28 @@ export default function TodoList({ items }: TodoListProps) {
             width: "100%",
           }}
         >
-          {items.map(({ text }) => (
-            <>
-              <ListItem disablePadding>
-                <ListItemButton>
-                  <ListItemText primary={text} />
+          {items.map(({ text, id }) => (
+            <span key={id}>
+              <ListItem disablePadding sx={{ display: "flex" }}>
+                <Input
+                  value={text}
+                  onChange={(e) => updateTodo(id, e.target.value)}
+                />
+                <ListItemButton
+                  sx={{ flexGrow: "0" }}
+                  onClick={async () => {
+                    await apiFetcher({
+                      path: `/todo/delete/${id}`,
+                      method: "DELETE",
+                    });
+                    mutate("/todo/all-todos");
+                  }}
+                >
+                  <DeleteOutlineIcon />
                 </ListItemButton>
               </ListItem>
               <Divider />
-            </>
+            </span>
           ))}
         </List>
       </Box>

@@ -23,6 +23,11 @@ public class TodoController {
         this.todoService = todoService;
     }
 
+    @GetMapping("/test")
+    public String test() throws Exception {
+        return "Getting though to API";
+    }    
+
     @PostMapping("/create")
     @CrossOrigin
     public Todo createTodo(@RequestBody Todo todo, Principal principal) {
@@ -41,9 +46,8 @@ public class TodoController {
 
     @DeleteMapping("/delete/{id}")
     @CrossOrigin
-    public String deleteTodo(@PathVariable String id) throws Exception {
+    public void deleteTodo(@PathVariable String id) throws Exception {
             todoService.deleteTodo(id);
-            return id;
     }
 
     @GetMapping("/all-todos")

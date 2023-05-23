@@ -1,5 +1,5 @@
-import SignInPage from "../views/SignInPage/SignInPage";
+import SignInView from "../views/SignInView/SignInView";
 
-export default function () {
-  return <SignInPage />;
+export default function SignInPage() {
+  return <SignInView />;
 }

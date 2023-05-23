@@ -12,17 +12,25 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { useRouter } from "next/router";
 
 const theme = createTheme();
 
 export default function SignInForm() {
+  const router = useRouter();
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+
+    const auth = getAuth();
+    signInWithEmailAndPassword(auth, data.get("email").toString(), data.get("password").toString())
+      .then((userCredential) => {
+        router.push("/todos");
+      })
+      .catch((error) => {
+       console.error(error);
+      });
   };
 
   return (
@@ -83,14 +91,10 @@ export default function SignInForm() {
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href="#">
-                  Forgot password?
-                </Link>
+                <Link href="#">Forgot password?</Link>
               </Grid>
               <Grid item>
-                <Link href="/sign-up">
-                  {"Don't have an account? Sign Up"}
-                </Link>
+                <Link href="/sign-up">{"Don't have an account? Sign Up"}</Link>
               </Grid>
             </Grid>
           </Box>

@@ -1,5 +1,10 @@
-import TodosPage from "../views/TodosPage/TodosPage";
+import TodosView from "../views/TodosView/TodosView";
+import { RouteProtector } from "./_app";
 
-export default function () {
-  return <TodosPage />;
+export default function TodosPage() {
+  return (
+    <RouteProtector>
+      <TodosView />
+    </RouteProtector>
+  );
 }
